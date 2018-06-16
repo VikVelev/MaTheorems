@@ -15,7 +15,7 @@ class UserList(generics.ListCreateAPIView):
         
         print(len(self.kwargs))
         if len(self.kwargs) is not 0:
-            #pylint: disable=E1101
+            #pylint: disable=E1101, C0111, W0611
             queryset = queryset.filter(id=self.kwargs['pk'])
 
         return queryset
