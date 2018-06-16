@@ -1,0 +1,11 @@
+.navHead {
+    margin: auto;
+    font-size: 2em;
+    text-align: center;
+    width: 100%;
+}
+
+.navbar {
+    padding-left: 20%;
+    padding-right: 20%;
+}
