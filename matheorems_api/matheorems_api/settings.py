@@ -28,6 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# Refference
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,6 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'minio_storage',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'rest_registration',
+    'django_extensions',
+    'corsheaders',
+    'core', 
 ]
 
 MIDDLEWARE = [
@@ -50,6 +59,17 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'matheorems_api.urls'
+
+REST_REGISTRATION = {
+    'REGISTER_VERIFICATION_ENABLED': False,
+
+    'RESET_PASSWORD_VERIFICATION_URL': 'https://localhost:3000/reset-password/',
+
+    'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
+
+    'VERIFICATION_FROM_EMAIL': 'no-reply@cid.com',
+    'LOGIN_RETRIEVE_TOKEN': True,
+}
 
 TEMPLATES = [
     {
@@ -66,6 +86,16 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',      
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # )
+}
 
 WSGI_APPLICATION = 'matheorems_api.wsgi.application'
 
