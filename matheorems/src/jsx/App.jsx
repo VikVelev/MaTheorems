@@ -4,10 +4,14 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from './Navbar'
 import '../styles/App.css';
 import { connect } from 'react-redux';
+import MainPage from './MainPage';
+import Login from './Login';
+import Theorem from './Theorem';
+
 
 @connect((store) => {
 	return {
-		state: store.stateManagement,
+		state: store.stateManager,
 	}
 })
 class App extends Component {
@@ -21,24 +25,27 @@ class App extends Component {
 	// }
 
   	render() {
+		console.log(this.props)
     	return (
-      		<div className="App">
-				<Router>
+			<Router className="App">
+				<div className="content">
 					<Navbar loggedIn={this.props.state.loggedIn}/>
-					<Route exact path="/" component={this.routes.Main} />
-					<Route exact path="/add" component={this.routes.Add} />
-					<Route exact path="/login" component={this.routes.Login} />					
-					<Route exact path="/theorem/:id" component={this.routes.Theorem} />
-				</Router>
-      		</div>
+					<Switch>
+						<Route exact path="/" component={this.routes.Main} />
+						<Route exact path="/add" component={this.routes.Add} />
+						<Route exact path="/login" component={this.routes.Login} />					
+						<Route exact path="/theorem/:id" component={this.routes.Theorem} />
+					</Switch>
+				</div>		
+			</Router>
     	);
 	}
 
 	routes = {
-		Main: () => <MainPage/>,
+		Main: () => ( <MainPage/> ),
 		Login: () => ( this.props.state.loggedIn ? <Redirect to="/"/> : <Login/> ),
 		Add: () => ( this.props.state.loggedIn ? <Redirect to="/add"/> : <Login/> ),
-		Theorem: (id) => <Theorem id={id.match.params.id}/>, 
+		Theorem: (id) => ( <Theorem id={id.match.params.id}/> ), 
 	}
 	  
 
