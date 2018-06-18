@@ -7,6 +7,7 @@ viewerSettings = {
   "showToolBar":false,
   "borderColor":null,
   "showMenuBar":false,
+
   "showAlgebraInput":false,
   "customToolbar":"0 || 1",
   "showResetIcon": false,
