@@ -7,7 +7,6 @@ viewerSettings = {
   "showToolBar":false,
   "borderColor":null,
   "showMenuBar":false,
-
   "showAlgebraInput":false,
   "customToolbar":"0 || 1",
   "showResetIcon": false,
@@ -23,14 +22,8 @@ viewerSettings = {
 window.ggbApp = new GGBApplet(viewerSettings, true);
 console.log("здр кп")
 
-window.onload = function() { 
-    window.ggbApp.inject('ggb-element');
-}
+let event = new Event('ggb-loaded')
 
-window.loadingGGBProbablyDone = function () {
-    console.log("NOW")
-}
-
-window.loadGgbFile = function(ggbFile64) {
-    
-}
+addEventListener('ggb-loaded', function() {
+    window.ggbApp.inject('ggb-element')
+})

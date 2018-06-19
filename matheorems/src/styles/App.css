@@ -1,3 +1,32 @@
 #ggb-element {
     margin: auto;
 }
+
+.login-form {
+    margin-top: 10%;
+}
+
+.main-container {
+    margin-left: 20%;
+    margin-right: 20%;    
+    display: flex;
+    flex-direction: row;
+}
+
+.main-item {
+    margin: auto;
+    margin-top: 0;
+}
+
+.left {
+    display: flex;
+    flex-direction: row;
+}
+
+.ui.menu {
+    margin-top: 0;
+    height: 100%;
+    margin-left: 2px;
+    margin-right: 2px;
+    
+}
