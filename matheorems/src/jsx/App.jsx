@@ -8,6 +8,7 @@ import MainPage from './MainPage';
 import Login from './Login';
 import Register from './Register'
 import Theorem from './Theorem';
+import Add from './Add'
 
 
 @connect((store) => {
@@ -39,7 +40,7 @@ class App extends Component {
 		Main: () => ( <MainPage/> ),
 		Login: () => ( this.props.state.loggedIn ? <Redirect to="/"/> : <Login/> ),
 		Register: () => ( this.props.state.loggedIn ? <Redirect to="/"/> : <Register/> ),
-		Add: () => ( this.props.state.loggedIn ? <Redirect to="/add"/> : <Login/> ),
+		Add: () => ( this.props.state.loggedIn ? <Add/> : <Redirect to='/login'/> ),
 		Theorem: (id) => ( <Theorem id={id.match.params.id}/> ), 
 	}
 	  

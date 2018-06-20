@@ -5,7 +5,7 @@ let defaultState = {
     loggedIn: false,
     loggedUser: {},
     currentTheorem: undefined,
-
+    allTheorems: [],
 }
 
 const myStorage = window.localStorage
@@ -24,7 +24,7 @@ if(myStorage.getItem("userManagement")){
 const stateManagement = (state=defaultState, action) => {
     switch (action.type) {
         case 'LOG_IN': case 'FETCH_USER': 
-        case 'REGISTER_USER':
+        case 'REGISTER_USER': case 'FETCH_THEOREMS':
             return {
                 ...state,
                 fetched: false,
@@ -35,7 +35,7 @@ const stateManagement = (state=defaultState, action) => {
             myStorage.setItem("userManagement", JSON.stringify({
                 ...state,
                 loggedUser: action.payload,
-                logged: true,
+                loggedIn: true,
                 redirecting: false,                
                 fetching: false,
                 fetched: true,
@@ -44,14 +44,14 @@ const stateManagement = (state=defaultState, action) => {
             return {
                 ...state,
                 loggedUser: { username: action.payload },
-                logged: true,
+                loggedIn: true,
                 fetching: false,
                 fetched: true,
             }
         case 'LOG_IN_REJECTED': 
             return {
                 ...state,
-                logged: false,
+                loggedIn: false,
                 fetching: false,
                 fetched: false,
                 error: action.payload,
@@ -60,13 +60,12 @@ const stateManagement = (state=defaultState, action) => {
             window.localStorage.setItem("userManagement", 
             JSON.stringify({
                 ...state,
-                logged: false,
+                loggedIn: false,
                 loggedUser: {},
             }))
             return {
                 ...state,
-                redirecting: false,                
-                logged: false,
+                loggedIn: false,
                 loggedUser: {},
                 token: "",
             }
@@ -80,11 +79,25 @@ const stateManagement = (state=defaultState, action) => {
         case 'REGISTER_USER_REJECTED':
             return {
                 ...state,
-                logged: false,
+                loggedIn: false,
                 redirecting: false,                
                 fetching: false,
                 fetched: false,
                 error: action.payload
+            }
+        case 'FETCH_THEOREMS_FULFILLED':
+            return {
+                ...state,
+                allTheorems: action.payload,
+                fetching: false,
+                fetched:true,
+            }
+        case 'FETCH_THEOREMS_REJECTED':
+            return {
+                ...state,
+                error: action.payload,
+                fetching: false,
+                fetched: false,
             }
         default: 
             return state

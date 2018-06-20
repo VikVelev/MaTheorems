@@ -14,6 +14,10 @@ export default class Navbar extends Component {
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
+    handleLogout() {
+        this.props.dispatch({ type: "LOG_OUT" })
+    }
+
     render() {
         const { activeItem } = this.state
 
@@ -45,7 +49,7 @@ export default class Navbar extends Component {
                     as={Link}
                     to={this.props.state.loggedIn ? '/logout' : '/login'}
                     active={activeItem === 'logout'}
-                    onClick={this.handleItemClick}
+                    onClick={this.handleLogout.bind(this)}
                 />
                 </Menu.Menu>
             </Menu>

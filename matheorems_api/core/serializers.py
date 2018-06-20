@@ -19,5 +19,6 @@ class TheoremSerializer(serializers.ModelSerializer):
             'name',
             'definition',
             'ggbFile64',
+            'classNum',
             'posted',
         )

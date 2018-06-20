@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Message, Grid, Form, Segment, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import { login } from './actions/actions'
 
 @connect((store) => {
 	return {
@@ -28,7 +29,7 @@ export default class LoginPage extends Component {
 		const { username, password } = this.state
 		this.setState({ loggingIn: true })
 		this.setState({ name: username, password: password })
-		//this.props.dispatch(login(username, password))
+		this.props.dispatch(login(username, password))
 	}
 
 	registerSuccess(text){

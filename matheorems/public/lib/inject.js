@@ -2,8 +2,8 @@ marginPrecent = 40
 
 viewerSettings = {
   "appName": "3d",
-  "width": window.outerWidth - window.outerWidth*marginPrecent/100, 
-  "height": window.outerHeight - 60,
+  "width": window.innerWidth - window.innerWidth*marginPrecent/100, 
+  "height": window.innerHeight - 100,
   "showToolBar":false,
   "borderColor":null,
   "showMenuBar":false,
