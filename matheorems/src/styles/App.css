@@ -33,3 +33,36 @@
     text-align: center;
     margin: 0;
 }
+
+.noTheorems {
+    font-size: 1em !important;
+    margin: 10px !important;
+}
+
+.currentlyComparing {
+    position: fixed !important;
+    right: 15%;
+    top: 0;
+    top: 60px;
+    z-index: 1000;
+
+}
+
+.addTheorem {
+    margin-left: 20% !important;
+    margin-right: 20% !important;    
+}
+
+.topRow {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.textinput {
+    width: 100%;
+}
+
+.viewerType {
+    margin-left: 10px !important;
+}

@@ -36,3 +36,9 @@ export function fetchTheorems() {
         })
     }
 }
+
+export function addTheorem(token, name, b64) {
+    return function(dispatch){
+        console.log(token,name,b64)
+    }
+}

@@ -88,7 +88,7 @@ const stateManagement = (state=defaultState, action) => {
         case 'FETCH_THEOREMS_FULFILLED':
             return {
                 ...state,
-                allTheorems: action.payload,
+                allTheorems: action.payload.data,
                 fetching: false,
                 fetched:true,
             }
