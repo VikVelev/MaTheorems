@@ -66,3 +66,10 @@
 .viewerType {
     margin-left: 10px !important;
 }
+
+
+.class-selector {
+    margin-left: 5px !important;
+    height: 38px !important;
+    z-index: 9000 !important;
+}

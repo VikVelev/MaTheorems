@@ -25,6 +25,7 @@ const stateManagement = (state=defaultState, action) => {
     switch (action.type) {
         case 'LOG_IN': case 'FETCH_USER': 
         case 'REGISTER_USER': case 'FETCH_THEOREMS':
+        case 'ADD_THEOREM':
             return {
                 ...state,
                 fetched: false,
@@ -93,6 +94,19 @@ const stateManagement = (state=defaultState, action) => {
                 fetched:true,
             }
         case 'FETCH_THEOREMS_REJECTED':
+            return {
+                ...state,
+                error: action.payload,
+                fetching: false,
+                fetched: false,
+            }
+        case 'ADD_THEOREM_FULFILLED':
+            return {
+                ...state,
+                fetched: true,
+                fetching: false,
+            }
+        case 'ADD_THEOREM_REJECTED':
             return {
                 ...state,
                 error: action.payload,

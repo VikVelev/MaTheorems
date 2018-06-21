@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Segment, Header, Form, Button, Message } from 'semantic-ui-react'
+import { Segment, Header, Form, Button, Message, Dropdown } from 'semantic-ui-react'
 import { addTheorem } from './actions/actions'
 import {connect} from 'react-redux'
 
@@ -12,9 +12,9 @@ export default class Add extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            initialCommit: false,
             title: "",
             description: "",
+            classNum: 8,
             type: "3d",
         }
     }
@@ -50,18 +50,20 @@ export default class Add extends Component {
         }
     }
 
-    handleSubmit = (e) => {        
-        let formSubmit = {}
-        let token = ""
-        let name = ""
+    handleSubmit = (e) => {
+        let token = this.props.state.loggedUser.token
+        let definition = this.state.description
+        let name = this.state.title
+        let classNum = this.state.classNum
+        let type = this.state.type
         let ggbFile64 = window.ggbApplet.getBase64()
         
-
-        console.log(ggbFile64)
         this.props.dispatch(
             addTheorem(
                 token,
                 name,
+                definition,
+                classNum,
                 ggbFile64,
             )
         )
@@ -75,6 +77,15 @@ export default class Add extends Component {
             value: "2d"
         }
     ]
+
+    getClassOptions(n) {
+        let options = []
+        for (let i = 7; i < n; i++) {
+            options.push({ value: i + 1, text: i + 1})
+        }
+
+        return options
+    }
 
     render(){
         return (
@@ -95,7 +106,7 @@ export default class Add extends Component {
                             name="title"
                         />
 
-                        {this.handleErrors("title")}
+                        
                         <Form.Checkbox
                             label="3D"
                             name="type"
@@ -104,8 +115,20 @@ export default class Add extends Component {
                             value={this.state.type}
                             onChange={this.handleChange}
                             options={this.types}
-                        />
+                            />
+
+                        <Dropdown 
+                            className="class-selector"
+                            name="classNum"
+                            value={this.state.classNum}
+                            onChange={this.handleChange}
+                            placeholder='клас' 
+                            selection 
+                            compact 
+                            options={this.getClassOptions(12)} />
                         </div>
+
+                        {this.handleErrors("title")}
                         <Header>Описание</Header>
 
                         <Form.Input 
@@ -119,13 +142,11 @@ export default class Add extends Component {
                             cols='50' 
                             placeholder="Описание"/>
 
-                        {this.state.type === "3d" ?
+                        {
+                            this.state.type === "3d" ?
                             <div id={"ggb-add-3d-element"}></div> :
                             <div id={"ggb-add-2d-element"}></div>
                         }
-                        
-
-                       
 
                         {this.handleErrors("description")}
                         {this.props.state.fetching ? 
@@ -138,7 +159,7 @@ export default class Add extends Component {
                         </Message> : null }                   
 
                     </Segment>
-                    <Button className="submitButton" type='submit 'color='blue' fluid size='large'>Добави</Button>
+                    <Button className="submitButton" type='submit' color='blue' fluid size='large'>Добави</Button>
                 </Form>
             </Segment>
         )

@@ -24,6 +24,7 @@ export default class Navbar extends Component {
         return (
             <Menu className="navbar">
                 <Menu.Item 
+                    label="Теорема"
                     name='Theorems'
                     as={Link}
                     to="/"
@@ -33,6 +34,7 @@ export default class Navbar extends Component {
                 { this.props.state.loggedIn ? 
                 <Menu.Item
                     icon='plus'
+                    label="Добави"
                     name='Add'
                     as={Link}
                     to="/add"
@@ -41,10 +43,9 @@ export default class Navbar extends Component {
                 /> : null }
                 <Menu.Header position='center' content="MaTheorems" className="navHead"/>
                 <Menu.Menu position='right'>
-                <Menu.Item>
-                    <Input icon='search' placeholder='Search...' />
-                </Menu.Item>
+
                 <Menu.Item
+                    label={this.props.state.loggedIn ? "Излез" : "Влез"}
                     name={this.props.state.loggedIn ? 'logout' : 'login'}
                     as={Link}
                     to={this.props.state.loggedIn ? '/logout' : '/login'}

@@ -37,8 +37,18 @@ export function fetchTheorems() {
     }
 }
 
-export function addTheorem(token, name, b64) {
+export function addTheorem(token, name, definition, classNum, b64) {
     return function(dispatch){
-        console.log(token,name,b64)
+        dispatch({ type: "ADD_THEOREM" })        
+        axios.post(url + "/api/theorems/", {
+            "name": name,
+            "definition": definition,
+            "ggbFile64": b64,
+            "classNum": classNum
+        }).then((response) => {
+            dispatch({ type: "ADD_THEOREM_FULFILLED", payload: response })
+        }).catch((error) => {
+            dispatch({ type: "ADD_THEOREM_REJECTED", payload: error })        
+        });
     }
 }
